@@ -1,0 +1,157 @@
+<template>
+  <!--Component Navbarre pour admin réutilisable de partout-->
+
+  <div class="nav_admin">
+    <div class="nav_primaire">
+      <div class="logo">
+        <img
+          src="../assets/img/logo_without_title.png"
+          style="max-width: 150px"
+        />
+      </div>
+      <router-link to="/connexion" @click="clearLocalStorage">
+        <div class="fav_icon">
+          <p>Logout<i class="fas fa-power-off"></i></p>
+        </div>
+      </router-link>
+    </div>
+    <div class="nav_secondaire"></div>
+    <nav>
+      <ul>
+        <li>
+          <router-link class="anim" to="/creation"
+            >Création de compte</router-link
+          >
+        </li>
+        <li>
+          <router-link class="anim" to="/dashboard">Dashboard</router-link>
+        </li>
+        <li>
+          <router-link class="anim" to="/AllFirms"
+            >Liste Entreprise</router-link
+          >
+        </li>
+        <li>
+          <router-link class="anim" to="/catalogue/services"
+            >Catalogue</router-link
+          >
+        </li>
+        <li>
+          <router-link class="anim" to="">Agenda</router-link>
+        </li>
+        <li>
+          <router-link class="anim" to="/AddService">{{ role }}</router-link>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</template>
+<script>
+export default {
+  inject: ["role"],
+  data() {
+    return {};
+  },
+  methods: {
+    clearLocalStorage() {
+      localStorage.clear("@token");
+    },
+  },
+};
+</script>
+<style scoped>
+body {
+  margin: 0px;
+}
+.nav_primaire {
+  background-color: #ffffff;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  padding-top: 3%;
+}
+.fav_icon {
+  color: #794c05;
+  text-align: right;
+  position: absolute;
+  right: 5%;
+  top: 2%;
+  font-size: 10px;
+}
+.fav_icon p i {
+  margin-left: 8px;
+}
+
+.nav_secondaire {
+  background-color: #c4831c;
+  height: 50px;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  color: black;
+}
+
+ul {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  color: black;
+}
+li {
+  list-style: none;
+  margin: 20px 10px;
+}
+.anim {
+  content: "";
+  text-decoration: none;
+  color: #ebd9c4;
+  font-size: 20px;
+}
+.anim:visited {
+  color: rgb(170, 108, 8);
+}
+
+
+.anim::before {
+  padding: 5px 0;
+  margin: 0 8px;
+  content: "";
+  border-left: 2px solid transparent;
+  color: #ffffff;
+}
+.anim::after {
+  padding: 5px 0;
+  margin: 0 8px;
+  content: "";
+  border-right: 2px solid transparent;
+  color: #ffffff;
+}
+.anim:hover::before {
+  margin: 0 8px;
+  content: "";
+  animation: btn1 0.5s;
+  animation-fill-mode: forwards;
+}
+.anim:hover::after {
+  margin: 0 8px;
+  content: "";
+  animation: btn1 0.5s;
+  animation-fill-mode: forwards;
+  color: #b3650b;
+}
+
+@keyframes btn1 {
+  from {
+    margin: 0 8px;
+    padding-top: 0px;
+    background-color: #ffffff;
+    opacity: 1;
+  }
+  to {
+    margin: 0 8px;
+    padding-top: 8px;
+    background-color: #df8927;
+    opacity: 1;
+  }
+}
+</style>
