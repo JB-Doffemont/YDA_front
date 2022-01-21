@@ -11,7 +11,8 @@
     <input type="text" v-model="name" id="name" />
     <input type="submit" value="Envoyer" id="submit_btn" />
     <br />
-    <ul></ul>
+  </form>
+  {{this.name}}
     <h2>Listes des types de services</h2>
     <!--v-for pour afficher tout les types en BDD -->
     <div class="type_card" v-for="(element, index) in typesArray" :key="index">
@@ -24,7 +25,7 @@
     <p v-for="type in types" :key="type">
       {{ type }} <i class="far fa-trash-alt"></i>
     </p>
-  </form>
+  
 </template>
 
 <script>
@@ -70,6 +71,7 @@ export default {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("@token"),
           Accept: "application/json",
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
           name: this.name,
@@ -86,12 +88,12 @@ export default {
       //ajout de fake data aprés validation input
       if (!this.name) {
         // input value is empty
-        return;
+      return;
       }
       // add item to reactive array items
       this.types.push(this.name);
       // clear the input
-      this.name = "";
+       this.name = "";
     },
     /* requete pour supprimer le type de service afficher en BDD et dynamiquement*/
     async deleteType(id) {
